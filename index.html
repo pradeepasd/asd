@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Width Banner Image Slider with Heading and Scrolling Text</title>
+    <style>
+        body, html {
+            width: 800px;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+           
+        #banner {
+            width: 100%;
+            border-bottom: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #slider {
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slides {
+            display: flex;
+            transition: all 0.5s ease;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 800px;
+            height: 600px;
+        }
+
+        /* Slider controls */
+        .slider-control {
+            display: none;
+        }
+
+        .slider-label {
+            position: absolute;
+            bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #control1 + .slider-label {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #control2 + .slider-label {
+            left: calc(50% - 30px);
+            transform: translateX(-50%);
+        }
+
+        #control3 + .slider-label {
+            left: calc(50% + 30px);
+            transform: translateX(-50%);
+        }
+
+        #control1:checked ~ #slides {
+            margin-left: 0%;
+        }
+
+        #control2:checked ~ #slides {
+            margin-left: -100%;
+        }
+
+        #control3:checked ~ #slides {
+            margin-left: -200%;
+        }
+
+        #text-section {
+            width: 100%;
+            height: 150px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 10px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            
+        }
+
+       ul li::before {
+  content: "\2022";  
+  color: #1288C5; 
+  font-weight: bold;
+  display: inline-block;
+  width: 1em; 
+  margin-left: -1em; 
+}
+
+        #heading {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+            color: white;
+            padding: 10px;
+            font-size: 24px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 2; 
+        }
+.autoscroller {
+   background: #efefef;
+}
+.autoscroller pre {
+   word-break: break-word; 
+}
+
+    </style>
+</head>
+<body>
+    <div id="banner">
+       
+        <!-- Image Slider Section -->
+        <div id="slider">
+            <input type="radio" name="slider" class="slider-control" id="control1" checked>
+            <!-- <label for="control1" class="slider-label">1</label> -->
+            
+            <input type="radio" name="slider" class="slider-control" id="control2">
+            <!-- <label for="control2" class="slider-label">2</label> -->
+            
+     
+            <div id="slides">
+                <div class="slide">
+                    <img src="../media/ITChamps1.jpeg" alt="Image 1">
+                </div>
+                <div class="slide">
+                    <img src="../media/ITChamps2.png" alt="Image 2">
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrolling Text Section -->
+
+    <div id="text-section" class="autoscroller">
+         <b><BIG style="color:#1288C5;">IT Champs </BIG><br></b>
+         <ul style="
+    line-height: 25px;
+">
+        <li>12 months access of eLearning</li>
+        <li>120 to 200 hrs of certification learning</li>
+        <li>100% placement assistance</li>
+        <li>Global SAP associate certification exam</li>
+    </ul>
+    <h3 style="color:#1288C5;">Be a part of the high-paid SAP workforce expected to reach 1.6 million by 2024.</h3>
+        <b>University students, graduates and postgraduates</b>,choose a SAP course of that suits your educational background with our offline or online training.<br><br>
+
+        <b>Working professional?</b> Suit your schedule with self-paced training.<br><br>
+
+         Sharpen your SAP skills with hands-on, real-time projects at IT Champs.<br><br>
+
+         <big><b style="color:#1288C5;">Why choose IT Champs</b></big>
+         <ul>
+        <li>Digital Transformation Company’ with 200+ SAP consultancy projects</li>
+        <li>Up-to-date, industry-relevant curriculum</li>
+        <li>Live, interactive sessions with quality trainers having real-time industry experience</li>
+        <li>Hands-on experience with FREE internships</li>
+        <li>Trained and certified 1000+ students</li>
+        <li>80% of the interns hired internally (performance based)</li>
+        <li>100 % placement assistance</li>
+    </ul>
+        <!-- Truncated for brevity -->
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slider-control');
+
+        function autoSlide() {
+            slides[slideIndex].checked = true;
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(autoSlide, 3000); // Change slide every 3 seconds
+        }
+
+        autoSlide();
+    </script>
+    <script type="text/javascript">
+    	
+
+
+    	var div = $('.autoscroller');
+
+$('.autoscroller').bind('scroll mousedown wheel DOMMouseScroll mousewheel keyup', function(evt) {
+    if (evt.type === 'DOMMouseScroll' || evt.type === 'keyup' || evt.type === 'mousewheel') {
+
+    }
+    if (evt.originalEvent.detail < 0 || (evt.originalEvent.wheelDelta && evt.originalEvent.wheelDelta > 0)) { 
+        clearInterval(autoscroller);
+    }
+    if (evt.originalEvent.detail > 0 || (evt.originalEvent.wheelDelta && evt.originalEvent.wheelDelta < 0)) { 
+        clearInterval(autoscroller);
+    }
+});
+
+var autoscroller = setInterval(function(){
+    var pos = div.scrollTop();
+    if ((div.scrollTop() + div.innerHeight()) >= div[0].scrollHeight) {
+        clearInterval(autoscroller);
+    }
+    div.scrollTop(pos + 1);
+}, 50);
+    </script>
+</body>
+</html>
